@@ -52,6 +52,7 @@ public class List {
             nodeTmp = nodeTmp.getNextNode();
         }
         System.out.print(nodeTmp.getValue() + "]");
+        System.out.println();
     }
 
     public void push(Object value) {
@@ -59,7 +60,7 @@ public class List {
         while (nodeTmp.getNextNode() != null) {
             nodeTmp = nodeTmp.getNextNode();
         }
-        nodeTmp.setNextNode(new Node(value));
+        nodeTmp.setNextNode(new Node(value, null, nodeTmp));
         this.length++;
     }
 
@@ -89,6 +90,7 @@ public class List {
         while (nodeTmp.getNextNode().getNextNode() != null) {
             nodeTmp = nodeTmp.getNextNode();
         }
+        nodeTmp.getNextNode().setPrevNode(null);
         nodeTmp.setNextNode(null);
         this.length--;
     }
@@ -102,12 +104,25 @@ public class List {
             for (int i = 0; i < index - 1 && nodeTmp.getNextNode().getNextNode() != null; i++) {
                 nodeTmp = nodeTmp.getNextNode();
             }
+            nodeTmp.getNextNode().getNextNode().setPrevNode(nodeTmp);
             nodeTmp.setNextNode(nodeTmp.getNextNode().getNextNode());
+            this.length--;
         }
+    }
+
+    public void popHead() {
+        this.head = this.head.getNextNode();
+        this.head.setPrevNode(null);
         this.length--;
     }
 
-    private void popHead() {
-        this.head = this.head.getNextNode();
+    public void reverseList() {
+        System.out.print("[");
+        Node nodeTmp = this.getLast();
+        while (nodeTmp.getPrevNode() != null) {
+            System.out.print(nodeTmp.getValue() + ", ");
+            nodeTmp = nodeTmp.getPrevNode();
+        }
+        System.out.print(nodeTmp.getValue() + "]");
     }
 }
