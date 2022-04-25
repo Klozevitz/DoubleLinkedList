@@ -125,5 +125,6 @@ public class List {
             nodeTmp = nodeTmp.getPrevNode();
         }
         System.out.print(nodeTmp.getValue() + "]");
+        System.out.println();
     }
 }
