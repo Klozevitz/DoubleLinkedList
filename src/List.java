@@ -2,6 +2,7 @@ public class List {
     private Node head;
     private int length;
 
+
     public int getLength() {
         return length;
     }
